@@ -1,0 +1,19 @@
+name: libbfm
+
+on: [push, pull_request]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Configure
+      run: cmake -B ${{github.workspace}}/libbfm/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/libbfm/build --config ${{env.BUILD_TYPE}}
